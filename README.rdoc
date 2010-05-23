@@ -1,6 +1,8 @@
 = to_csv plugin
 
-This simple plugin gives you the ability to call to_csv to a collection of activerecords. The builder options are the same as to_json / to_xml, except for the :include. Additional option :header_names permits to define custom header names instead of default humanized attribute names.
+This simple plugin gives you the ability to call to_csv to a collection of activerecords. The builder options are the same as to_json / to_xml, except for the :include, and with following additional options: 
+- :header_names defines custom header names instead of humanized attribute names
+- :order defines the order of the columns
 
 
 == Usage
@@ -17,6 +19,7 @@ This simple plugin gives you the ability to call to_csv to a collection of activ
   @users.to_csv(:except => [:last_name, :role])
   @users.to_csv(:methods => :admin?)
   @users.to_csv(:header_names => {:role => "Function", :id => "Identifier"})  
+  @users.to_csv(:order => [:id, :admin?, :first_name, :last_name, :role], :methods => :admin?)
 
 
 == Real life example

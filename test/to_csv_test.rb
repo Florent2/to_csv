@@ -48,4 +48,11 @@ class ToCsvTest < Test::Unit::TestCase
     assert_equal( "Age,Identifier,Full name\n25,1,Ary\n22,2,Nati\n", @users.to_csv(:header_names => {:name => "Full name", :id => "Identifier"}))
   end
   
+  def test_with_order
+    assert_equal( "Is old?,Name,Id,Age\nfalse,Ary,1,25\nfalse,Nati,2,22\n", @users.to_csv(:order => [:is_old?, :name, :id, :age], :methods => [:is_old?]) )        
+  end
+  
+  def test_with_incomplete_order
+    assert_equal( "Id,Age,Name\n1,25,Ary\n2,22,Nati\n", @users.to_csv(:order => [:id]))
+  end
 end

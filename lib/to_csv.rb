@@ -14,6 +14,8 @@ class Array
     columns += Array(options[:methods])
 
     return '' if columns.empty?
+        
+    columns = ((options[:order] & columns) + columns).uniq if options[:order]
     
     output = FasterCSV.generate do |csv|
       csv << columns.map { |column| (options[:header_names] && options[:header_names][column]) || klass.human_attribute_name(column) } unless options[:headers] == false
